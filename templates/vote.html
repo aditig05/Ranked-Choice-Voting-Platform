@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Cast Your Vote{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Cast Your Vote</h2>
+    <p>Rank the candidates from your most preferred (1st) to least preferred. You don't need to rank all candidates if you don't want to, but you must select at least your first choice.</p>
+    
+    {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+    
+    <form method="POST" class="vote-form">
+        <div class="ranking-container">
+            {% for i in range(1, candidates|length + 1) %}
+                <div class="form-group ranking-select">
+                    <label for="pref{{ i }}">{{ i }}. Preference</label>
+                    <select id="pref{{ i }}" name="pref{{ i }}" class="candidate-select" data-pref="{{ i }}">
+                        <option value="">-- Select Candidate --</option>
+                        {% for candidate in candidates %}
+                            <option value="{{ candidate }}" 
+                                {% if request.method == 'POST' and request.form.get('pref' ~ i) == candidate %}selected{% endif %}>
+                                {{ candidate }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn">Submit Vote</button>
+            <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selects = document.querySelectorAll('.candidate-select');
+    
+    selects.forEach(select => {
+        select.addEventListener('change', function() {
+            const selectedValue = this.value;
+            const currentPref = parseInt(this.dataset.pref);
+            
+            if (!selectedValue) return;
+            
+            // Remove this candidate from other dropdowns
+            selects.forEach(otherSelect => {
+                if (otherSelect !== this && otherSelect.value === selectedValue) {
+                    otherSelect.value = '';
+                }
+            });
+            
+            // If a higher preference is selected, clear all lower preferences
+            if (selectedValue) {
+                selects.forEach(otherSelect => {
+                    const otherPref = parseInt(otherSelect.dataset.pref);
+                    if (otherPref > currentPref && otherSelect.value) {
+                        otherSelect.value = '';
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

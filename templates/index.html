@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Ranked Choice Voting{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Ranked Choice Voting</h1>
+        <p class="lead">Your voice matters! Cast your vote in the most democratic way possible.</p>
+        <a href="{{ url_for('vote') }}" class="btn btn-primary btn-lg">Vote Now</a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <section class="how-it-works">
+        <h2 class="text-center mb-5">How Ranked Choice Voting Works</h2>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Rank Your Choices</h3>
+                    <p>Instead of choosing just one candidate, rank them in order of your preference.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Automatic Runoffs</h3>
+                    <p>If no candidate gets a majority, the last-place candidate is eliminated and votes are redistributed.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Majority Winner</h3>
+                    <p>The process continues until one candidate receives more than 50% of the vote.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits mt-5 pt-5">
+        <h2 class="text-center mb-4">Why Ranked Choice Voting?</h2>
+        <div class="row">
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>More Choice</h3>
+                <p>Vote for your favorite candidate without worrying about "wasting" your vote.</p>
+            </div>
+            
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Better Representation</h3>
+                <p>Winners have broader support from the electorate.</p>
+            </div>
+            
+            <div class="benefit">
+                <div class="benefit-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Positive Campaigns</h3>
+                <p>Candidates have an incentive to appeal to a broader range of voters.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="get-started text-center mt-5 pt-5">
+        <h2>Ready to Vote?</h2>
+        <p class="lead mb-4">Make your voice heard in this important election.</p>
+        <a href="{{ url_for('vote') }}" class="btn btn-primary btn-lg">Vote Now</a>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.hero {
+    background: linear-gradient(135deg, #4a6fa5 0%, #2c3e50 100%);
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.lead {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-primary {
+    background-color: #ff6b6b;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+    background-color: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.steps {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    margin-bottom: 2.5rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    background-color: #4a6fa5;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    text-align: left;
+}
+
+.step h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.benefits {
+    background-color: #f8f9fa;
+    padding: 4rem 0;
+    margin: 4rem -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.benefits h2 {
+    color: #2c3e50;
+    margin-bottom: 3rem;
+}
+
+.benefit {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.benefit:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    color: #4a6fa5;
+    margin-bottom: 1rem;
+}
+
+.benefit h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.get-started {
+    padding: 4rem 0;
+}
+
+.get-started h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .lead {
+        font-size: 1.2rem;
+    }
+    
+    .step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .step-number {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .step-content {
+        text-align: center;
+    }
+}
+</style>
+{% endblock %}

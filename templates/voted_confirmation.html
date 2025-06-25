@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Vote Confirmed{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="confirmation-header">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <h2>Your Vote Has Been Recorded!</h2>
+    </div>
+    
+    <div class="alert alert-success">
+        Thank you for participating in the election. Your vote has been successfully recorded.
+    </div>
+    
+    <div class="vote-summary card">
+        <h3>Your Preferences</h3>
+        {% if user_vote %}
+            <div class="preference-list">
+            {% for rank_str, candidate in user_vote.items() %}
+                {% if candidate %}
+                    <div class="preference-item">
+                        <span class="rank">{{ rank_str }}</span>
+                        <span class="candidate-name">{{ candidate }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% else %}
+            <div class="alert alert-error">
+                No vote preferences found. (This might happen if you navigated directly here.)
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="form-actions">
+        <a href="{{ url_for('home') }}" class="btn">Return to Home</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.confirmation-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    color: #4CAF50;
+    margin: 0 auto 1rem;
+    display: block;
+}
+
+.vote-summary {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+.preference-list {
+    margin-top: 1.5rem;
+}
+
+.preference-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.preference-item:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 100px;
+}
+
+.candidate-name {
+    flex-grow: 1;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+</style>
+{% endblock %}
