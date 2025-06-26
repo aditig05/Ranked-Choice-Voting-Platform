@@ -251,5 +251,10 @@ def export_votes(file_type):
         
         return response
 
+# Run the application
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    # Get port from environment variable or default to 3000
+    port = int(os.environ.get('PORT', 3000))
+    # Only run with debug=True in development
+    debug = os.environ.get('FLASK_ENV') == 'development'
+    app.run(host='0.0.0.0', port=port, debug=debug)
