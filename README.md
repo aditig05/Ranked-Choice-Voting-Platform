@@ -1,6 +1,6 @@
 # 🗳️ Ranked Choice Voting (RCV) Simulator
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://web-production-d16ce.up.railway.app/)
+[![Deployed on Railway](https://railway.app/button.svg)](https://web-production-d16ce.up.railway.app/)
 
 A full-stack web application that implements a secure and user-friendly Ranked Choice Voting system. Built with Python Flask, SQLAlchemy, and modern frontend technologies, this application demonstrates a real-world implementation of alternative voting systems with a focus on usability and data integrity.
 
